@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/detail_movie_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Chappie"
+            android:textSize="40sp"
+            android:paddingLeft="15sp"
+            android:paddingBottom="15sp"
+            android:textColor="@color/white"
+            android:background="@color/blue"
+            android:paddingTop="30sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:paddingTop="16sp">
+
+            <ImageView
+                android:id="@+id/detail_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/detail_release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:text="2015"/>
+
+                <TextView
+                    android:id="@+id/detail_average_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="87.8"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/detail_movie_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20sp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:text="difhbfsjkfbsjkdflkshfiozjiehehehheo nfioenefinefienl zenfq ejnf enffl lqfnlefcnklnvl r vqivn qlrn qorb fiqnf poeqnf incizernfqnfdbds
+            fkjdsbfbqdsfbnoinf nocorgopqj r g
+            gnq endfmivnfiogibngjdofkdspkf rgn rpoqgj oprfqn oj pn"/>
+
+
+
+        </LinearLayout>
+
+</ScrollView>

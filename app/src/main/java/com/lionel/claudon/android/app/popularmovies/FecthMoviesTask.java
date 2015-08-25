@@ -105,6 +105,7 @@ public class FecthMoviesTask extends AsyncTask<String, Void, Void> {
         final String OWM_SYNOPSYS = "overview";
         final String OWM_POPULARITY = "popularity";
         final String OWM_RATE = "vote_average";
+        final String OWM_RELEASE_DATE = "release_date";
 
 
         try {
@@ -122,6 +123,7 @@ public class FecthMoviesTask extends AsyncTask<String, Void, Void> {
                 double popularity;
                 double rate;
                 String posterPath;
+                String releaseDate;
 
                 // Get the JSON object representing the day
                 JSONObject movie = movieArray.getJSONObject(i);
@@ -132,6 +134,7 @@ public class FecthMoviesTask extends AsyncTask<String, Void, Void> {
                 popularity = movie.getDouble(OWM_POPULARITY);
                 rate = movie.getDouble(OWM_RATE);
                 posterPath = movie.getString(OWM_POSTER_URL);
+                releaseDate = movie.getString(OWM_RELEASE_DATE);
 
                 ContentValues weatherValues = new ContentValues();
 
@@ -141,6 +144,7 @@ public class FecthMoviesTask extends AsyncTask<String, Void, Void> {
                 weatherValues.put(MoviesEntry.COLUMN_TITLE, title);
                 weatherValues.put(MoviesEntry.COLUMN_SYNOPSYS, description);
                 weatherValues.put(MoviesEntry.COLUMN_RATE, rate);
+                weatherValues.put(MoviesEntry.COLUMN_RELEASE_DATE, releaseDate);
 
                 cVVector.add(weatherValues);
             }

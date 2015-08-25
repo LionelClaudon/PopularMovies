@@ -3,6 +3,7 @@ package com.lionel.claudon.android.app.popularmovies;
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -39,11 +40,13 @@ public class MoviesFragment extends Fragment implements LoaderManager.LoaderCall
             // using the location set by the user, which is only in the Location table.
             // So the convenience is worth it.
             MoviesContract.MoviesEntry.TABLE_NAME + "." + MoviesContract.MoviesEntry._ID,
+            MoviesContract.MoviesEntry.COLUMN_MOVIE_ID,
             MoviesContract.MoviesEntry.COLUMN_POSTER_URL,
     };
 
-    public static final int COL_MOVIES_ID = 0;
-    public static final int COL_MOVIES_POSTER_URL = 1;
+    public static final int COL_ID = 0;
+    public static final int COL_MOVIE_ID = 1;
+    public static final int COL_MOVIES_POSTER_URL = 2;
 
 
     @Override
@@ -69,7 +72,8 @@ public class MoviesFragment extends Fragment implements LoaderManager.LoaderCall
                 // if it cannot seek to that position.
                 Cursor cursor = (Cursor) parent.getItemAtPosition(position);
                 if (cursor != null && cursor.moveToPosition(position)) {
-                    //TODO
+                    int movieId = cursor.getInt(COL_MOVIE_ID);
+                    ((Callback) getActivity()).onItemSelected(MoviesContract.MoviesEntry.buildMoviesUriWithMovieId(String.valueOf(movieId)));
                 }
             }
         });
@@ -149,6 +153,18 @@ public class MoviesFragment extends Fragment implements LoaderManager.LoaderCall
         }
 
         getLoaderManager().restartLoader(MOVIES_LOADER_ID, null, this);
+    }
+
+    /**
+     * A callback interface that all activities containing this fragment must
+     * implement. This mechanism allows activities to be notified of item
+     * selections.
+     */
+    public interface Callback {
+        /**
+         * DetailFragmentCallback for when an item has been selected.
+         */
+        public void onItemSelected(Uri dateUri);
     }
 
 }

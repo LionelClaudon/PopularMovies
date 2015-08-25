@@ -11,5 +11,6 @@
     <string name="pref_orderby_popularity_option">Popularity</string>
     <string name="pref_orderby_label">Order Movies By</string>
     <string name="pref_orderby_key">orderBy</string>
+    <string name="title_activity_detail">Movie Detail</string>
 
 </resources>

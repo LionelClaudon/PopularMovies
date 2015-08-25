@@ -36,6 +36,8 @@ public class MoviesContract {
         public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_POPULARITY = "popularity";
         public static final String COLUMN_RATE = "rate";
+        public static final String COLUMN_RELEASE_DATE = "release_date";
+
 
 
 
@@ -45,9 +47,16 @@ public class MoviesContract {
         public static final String CONTENT_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_MOVIES;
 
-
         public static Uri buildMoviesUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
+
+        public static Uri buildMoviesUriWithMovieId(String id) {
+            return CONTENT_URI.buildUpon().appendPath(id).build();
+        }
+
+        public static String getMovieIdFromUri(Uri uri) {
+            return uri.getPathSegments().get(1);
         }
     }
 }

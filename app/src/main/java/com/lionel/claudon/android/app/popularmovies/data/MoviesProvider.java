@@ -20,6 +20,7 @@ public class MoviesProvider extends ContentProvider {
     private MoviesDbHelper mOpenHelper;
 
     static final int MOVIES = 100;
+    static final int MOVIES_WITH_ID = 101;
 
     /*
         This UriMatcher will
@@ -34,13 +35,14 @@ public class MoviesProvider extends ContentProvider {
         // 2) Use the addURI function to match each of the types.  Use the constants from
         // WeatherContract to help define the types to the UriMatcher.
         uriMatcher.addURI(CONTENT_AUTHORITY, PATH_MOVIES, MOVIES);
+        uriMatcher.addURI(CONTENT_AUTHORITY, PATH_MOVIES + "/*", MOVIES_WITH_ID);
+
 
 
 
         // 3) Return the new matcher!
         return uriMatcher;
     }
-
 
     @Override
     public boolean onCreate() {
@@ -65,11 +67,31 @@ public class MoviesProvider extends ContentProvider {
                         sortOrder);
                 break;
             }
+            case MOVIES_WITH_ID:
+                retCursor = getMovieById(uri, projection, sortOrder);
+                break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
         retCursor.setNotificationUri(getContext().getContentResolver(), uri);
         return retCursor;
+    }
+
+    private Cursor getMovieById(Uri uri, String[] projection, String sortOrder) {
+        String movieId = MoviesContract.MoviesEntry.getMovieIdFromUri(uri);
+
+        String[] selectionArgs = new String[]{movieId};
+        String selection = MoviesContract.MoviesEntry.TABLE_NAME + "." + MoviesContract.MoviesEntry.COLUMN_MOVIE_ID + " = ? ";
+
+        return mOpenHelper.getReadableDatabase().query(
+                MoviesContract.MoviesEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
     }
 
     @Override
